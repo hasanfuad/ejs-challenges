@@ -18,9 +18,12 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+const storeObject = [];
 
 app.get("/", function(req, res){
-  res.render("home", {showPara:homeStartingContent});
+  res.render("home", {showPara:homeStartingContent,
+  postToHome:storeObject
+});
 })
 
 app.get("/about",function(req,res){
@@ -32,7 +35,7 @@ app.get("/contact", function(req, res){
 })
 
 app.get("/compose", function(req, res){
-  res.render("compose",{composeInput:composeContent});
+  res.render("compose",{composeInput : composeContent});
 })
 
 app.post("/compose", function(req, res){
@@ -42,9 +45,26 @@ app.post("/compose", function(req, res){
     textArea : req.body.inputArea
   }
 
-  
-  console.log(objectName);
+  storeObject.push(objectName);
+  res.redirect("/");
 })
+
+app.get("/posts/:postPage", function(req, res){
+  
+   const requestTitle = req.params.postPage;
+
+   storeObject.forEach(function(element){
+     const storedTitle = element.titleArea;
+
+     if( storedTitle === requestTitle){
+       console.log("Match found!");
+     }
+     else{
+       console.log("Not a Match");
+     }
+   })
+
+});
 
 
 

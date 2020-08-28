@@ -2,5 +2,12 @@
 
     <h1> Home</h1>
     <p><%= showPara %></p>
+    <% console.log(postToHome); %>
+
+    <% postToHome.forEach(function(elements){ %>
+        <h1><%= elements.titleArea %></h1>
+        <p><%= elements.textArea %></p>
+    <% }); %>
+
 
 <%- include("partials/footer")%>
