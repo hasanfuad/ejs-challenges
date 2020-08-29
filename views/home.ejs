@@ -1,13 +1,16 @@
-<%- include("partials/header")%>
+<%- include("partials/header"); -%>
 
     <h1> Home</h1>
     <p><%= showPara %></p>
-    <% console.log(postToHome); %>
 
     <% postToHome.forEach(function(elements){ %>
         <h1><%= elements.titleArea %></h1>
-        <p><%= elements.textArea %></p>
+        <p><%= elements.textArea.substring(0,100)+" ..." %>
+        <a href="/posts/<%=elements.titleArea%>">Read More</a>
+        </p>
+
     <% }); %>
 
 
-<%- include("partials/footer")%>
+
+<%- include("partials/footer"); -%>
